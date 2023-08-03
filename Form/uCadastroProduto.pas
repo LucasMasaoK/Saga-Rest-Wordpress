@@ -80,61 +80,68 @@ end;
 
 procedure TfrmCadastroProduto.BitBtn3Click(Sender: TObject);
 begin
-  if comboSite.ItemIndex = 0 then
-  queryProdutosPRODUTO_SITE.AsInteger:=1;
+  var
+    JSON, Response: TJSONObject;
+  JSON := TJSONObject.Create;
+
+  if (comboSite.ItemIndex = 0) AND (queryProdutosCOD_SITE.AsInteger = 0) then
+  // CONDIÇÃO PRODUTO NOVO
   begin
-    var
-      JSON, Response: TJSONObject;
-    JSON := TJSONObject.Create;
+    queryProdutosPRODUTO_SITE.AsInteger := 1;
 
     base_url := 'https://cvcacessorios.com.br/';
     consumer_key := 'ck_f1b6e8c33b87879ba2b27d9573e2a98f07f4c269';
     consumer_secret := 'cs_7a0bf264d6f1871c765b89d7eecccabacbc19088';
 
-    if edit = false then
-    begin
-      restRequest.Method := rmPOST;
-      url_api := 'wp-json/wc/v3/products/';
-      JSON.AddPair('name', '#Saga ' + queryProdutosPROD_DESCRICAO.Value);
-      JSON.AddPair('type', 'simple');
-      JSON.AddPair('regular_price', queryProdutosPROD_CMV.Value.ToString);
-      JSON.AddPair('status', 'pending');
-      JSON.AddPair('sku', queryProdutosCOD_PRODUTO.Value.ToString);
-      JSON.AddPair('manage_stock', 'true');
-      JSON.AddPair('stock_quantity', queryProdutosQTDE.Value.ToString);
+    restRequest.Method := rmPOST;
+    url_api := 'wp-json/wc/v3/products/';
+    JSON.AddPair('name', '#Saga ' + queryProdutosPROD_DESCRICAO.Value);
+    JSON.AddPair('type', 'simple');
+    JSON.AddPair('regular_price', queryProdutosPROD_CMV.Value.ToString);
+    JSON.AddPair('status', 'pending');
+    JSON.AddPair('sku', queryProdutosCOD_PRODUTO.Value.ToString);
+    JSON.AddPair('manage_stock', 'true');
+    JSON.AddPair('stock_quantity', queryProdutosQTDE.Value.ToString);
 
-      restClient.BaseURL := base_url + url_api + '?consumer_key=' + consumer_key
-        + '&consumer_secret=' + consumer_secret;
+    restClient.BaseURL := base_url + url_api + '?consumer_key=' + consumer_key +
+      '&consumer_secret=' + consumer_secret;
 
-      restRequest.AddBody(JSON);
-      memoJson.Text := JSON.ToString;
-      restRequest.Execute;
-      Response := restResponse.JSONValue as TJSONObject;
-      memoResponse.Text := Response.Values['id'].Value;
-      queryProdutosCOD_SITE.AsInteger := Response.Values['id'].Value.ToInteger;
-    end
-    else
-    begin
-      restRequest.Method := rmPUT;
-      url_api := '/wp-json/wc/v3/products/' + queryProdutosCOD_SITE.value.ToString;
-      JSON.AddPair('name', '#EDITSaga ' + queryProdutosPROD_DESCRICAO.Value);
-      JSON.AddPair('type', 'simple');
-      JSON.AddPair('regular_price', queryProdutosPROD_CMV.Value.ToString);
-      JSON.AddPair('status', 'pending');
-      JSON.AddPair('sku', queryProdutosCOD_PRODUTO.Value.ToString);
-      JSON.AddPair('manage_stock', 'true');
-      JSON.AddPair('stock_quantity', queryProdutosQTDE.Value.ToString);
+    restRequest.AddBody(JSON);
+    memoJson.Text := JSON.ToString;
+    restRequest.Execute;
+    Response := restResponse.JSONValue as TJSONObject;
+    memoResponse.Text := Response.Values['id'].Value;
+    queryProdutosCOD_SITE.AsInteger := Response.Values['id'].Value.ToInteger;
 
-      restClient.BaseURL := base_url + url_api + '?consumer_key=' + consumer_key
-        + '&consumer_secret=' + consumer_secret;
+  end
+  else if (comboSite.ItemIndex = 0) AND (queryProdutosCOD_SITE.AsInteger > 0)
+  then // CONDIÇÃO UPDATE
+  begin
+    restRequest.Method := rmPUT;
+    url_api := '/wp-json/wc/v3/products/' +
+      queryProdutosCOD_SITE.Value.ToString;
+    JSON.AddPair('name', '#EDITSaga ' + queryProdutosPROD_DESCRICAO.Value);
+    JSON.AddPair('type', 'simple');
+    JSON.AddPair('regular_price', queryProdutosPROD_CMV.Value.ToString);
+    JSON.AddPair('status', 'pending');
+    JSON.AddPair('sku', queryProdutosCOD_PRODUTO.Value.ToString);
+    JSON.AddPair('manage_stock', 'true');
+    JSON.AddPair('stock_quantity', queryProdutosQTDE.Value.ToString);
 
-      restRequest.AddBody(JSON);
-      memoJson.Text := JSON.ToString;
-      restRequest.Execute;
-      Response := restResponse.JSONValue as TJSONObject;
-    end;
+    restClient.BaseURL := base_url + url_api + '?consumer_key=' + consumer_key +
+      '&consumer_secret=' + consumer_secret;
 
+    restRequest.AddBody(JSON);
+    memoJson.Text := JSON.ToString;
+    restRequest.Execute;
+    Response := restResponse.JSONValue as TJSONObject;
+  end
+
+  else if (comboSite.ItemIndex = 1) then // CONDIÇÃO DE PRODUTO APENAS SISTEMA
+  begin
+    queryProdutos.Post
   end;
+  
   queryProdutos.Post
 end;
 
@@ -146,10 +153,7 @@ end;
 
 procedure TfrmCadastroProduto.bntEditarClick(Sender: TObject);
 begin
-  base_url := 'https://cvcacessorios.com.br/';
-  consumer_key := 'ck_f1b6e8c33b87879ba2b27d9573e2a98f07f4c269';
-  consumer_secret := 'cs_7a0bf264d6f1871c765b89d7eecccabacbc19088';
-  edit := True;
+
   queryProdutos.edit;
 end;
 

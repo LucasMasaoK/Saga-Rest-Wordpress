@@ -15,9 +15,9 @@ object frmCadastroProduto: TfrmCadastroProduto
   object Label1: TLabel
     Left = 8
     Top = 32
-    Width = 83
+    Width = 25
     Height = 15
-    Caption = 'COD_PRODUTO'
+    Caption = 'COD'
     FocusControl = DBEdit1
   end
   object Label2: TLabel
@@ -43,6 +43,35 @@ object frmCadastroProduto: TfrmCadastroProduto
     Height = 15
     Caption = 'PROD_CMV'
     FocusControl = DBEdit4
+  end
+  object Label5: TLabel
+    Left = 288
+    Top = 96
+    Width = 51
+    Height = 15
+    Caption = 'COD_SITE'
+  end
+  object Label6: TLabel
+    Left = 288
+    Top = 96
+    Width = 79
+    Height = 15
+    Caption = 'PRODUTO_SITE'
+  end
+  object Label7: TLabel
+    Left = 67
+    Top = 32
+    Width = 51
+    Height = 15
+    Caption = 'COD_SITE'
+    FocusControl = DBEdit2
+  end
+  object Label8: TLabel
+    Left = 464
+    Top = 32
+    Width = 123
+    Height = 15
+    Caption = 'Cadastrar Produto Site?'
   end
   object DBEdit1: TDBEdit
     Left = 8
@@ -118,14 +147,14 @@ object frmCadastroProduto: TfrmCadastroProduto
       TabOrder = 2
       OnClick = BitBtn3Click
     end
-    object BitBtn4: TBitBtn
+    object btnPesquisa: TBitBtn
       Left = 360
       Top = 16
       Width = 91
       Height = 49
-      Caption = 'BitBtn1'
+      Caption = 'Pesquisa'
       TabOrder = 3
-      OnClick = BitBtn4Click
+      OnClick = btnPesquisaClick
     end
   end
   object memoJson: TMemo
@@ -146,6 +175,36 @@ object frmCadastroProduto: TfrmCadastroProduto
       'memoJson')
     TabOrder = 6
   end
+  object DBEdit2: TDBEdit
+    Left = 67
+    Top = 48
+    Width = 40
+    Height = 23
+    DataField = 'COD_SITE'
+    DataSource = sourceProdutos
+    TabOrder = 7
+  end
+  object comboSite: TComboBox
+    Left = 464
+    Top = 48
+    Width = 145
+    Height = 23
+    ItemIndex = 1
+    TabOrder = 8
+    Text = 'N'#227'o'
+    Items.Strings = (
+      'Sim'
+      'N'#227'o')
+  end
+  object DBLookupComboBox1: TDBLookupComboBox
+    Left = 336
+    Top = 160
+    Width = 145
+    Height = 23
+    DataField = 'PROD_DESCRICAO'
+    DataSource = sourceProdutos
+    TabOrder = 9
+  end
   object queryProdutos: TFDQuery
     Active = True
     Connection = DataModule1.bancoConexao
@@ -154,8 +213,10 @@ object frmCadastroProduto: TfrmCadastroProduto
       'COD_PRODUTO,'
       'PROD_DESCRICAO,'
       'QTDE,'
-      'PROD_CMV'
-      'FROM PRODUTOS;')
+      'PROD_CMV,'
+      'COD_SITE,'
+      'PRODUTO_SITE'
+      'FROM PRODUTOS WHERE COD_PRODUTO=690;')
     Left = 496
     Top = 368
     object queryProdutosCOD_PRODUTO: TIntegerField
@@ -177,6 +238,14 @@ object frmCadastroProduto: TfrmCadastroProduto
     object queryProdutosPROD_CMV: TCurrencyField
       FieldName = 'PROD_CMV'
       Origin = 'PROD_CMV'
+    end
+    object queryProdutosCOD_SITE: TIntegerField
+      FieldName = 'COD_SITE'
+      Origin = 'COD_SITE'
+    end
+    object queryProdutosPRODUTO_SITE: TIntegerField
+      FieldName = 'PRODUTO_SITE'
+      Origin = 'PRODUTO_SITE'
     end
   end
   object sourceProdutos: TDataSource
