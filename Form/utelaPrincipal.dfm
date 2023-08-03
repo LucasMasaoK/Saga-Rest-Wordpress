@@ -2,7 +2,7 @@ object frmPrincipal: TfrmPrincipal
   Left = 0
   Top = 0
   Caption = 'Saga Rest - Integra'#231#227'o Wordpress'
-  ClientHeight = 447
+  ClientHeight = 442
   ClientWidth = 628
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET

@@ -3,7 +3,8 @@ unit uCadastroProduto;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
@@ -32,21 +33,31 @@ type
     BitBtn1: TBitBtn;
     bntEditar: TBitBtn;
     BitBtn3: TBitBtn;
-    BitBtn4: TBitBtn;
+    btnPesquisa: TBitBtn;
     memoJson: TMemo;
     memoResponse: TMemo;
     restRequest: TRESTRequest;
     restClient: TRESTClient;
     SimpleAuthenticator1: TSimpleAuthenticator;
     restResponse: TRESTResponse;
+    queryProdutosCOD_SITE: TIntegerField;
+    queryProdutosPRODUTO_SITE: TIntegerField;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    DBEdit2: TDBEdit;
+    Label8: TLabel;
+    comboSite: TComboBox;
+    DBLookupComboBox1: TDBLookupComboBox;
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure bntEditarClick(Sender: TObject);
-    procedure BitBtn4Click(Sender: TObject);
+    procedure btnPesquisaClick(Sender: TObject);
   private
     { Private declarations }
   public
-    { Public declarations }
+    edit: Boolean;
+    base_url, url_api, consumer_key, consumer_secret: String;
   end;
 
 var
@@ -60,40 +71,86 @@ uses uDataModule;
 
 procedure TfrmCadastroProduto.BitBtn1Click(Sender: TObject);
 begin
-
-queryProdutos.Append;
+  base_url := 'https://cvcacessorios.com.br/';
+  consumer_key := 'ck_f1b6e8c33b87879ba2b27d9573e2a98f07f4c269';
+  consumer_secret := 'cs_7a0bf264d6f1871c765b89d7eecccabacbc19088';
+  edit := false;
+  queryProdutos.Append;
 end;
 
 procedure TfrmCadastroProduto.BitBtn3Click(Sender: TObject);
 begin
-var json, response:TJSONObject;
- json:=TJSONObject.Create;
+  if comboSite.ItemIndex = 0 then
+  queryProdutosPRODUTO_SITE.AsInteger:=1;
+  begin
+    var
+      JSON, Response: TJSONObject;
+    JSON := TJSONObject.Create;
 
- json.AddPair('name','#Saga ' + queryProdutosPROD_DESCRICAO.Value);
- json.AddPair('type','simple');
- json.AddPair('regular_price',queryProdutosPROD_CMV.Value.ToString);
- json.AddPair('status','pending');
- json.AddPair('sku',queryProdutosCOD_PRODUTO.Value.ToString);
- json.AddPair('manage_stock','true');
- json.AddPair('stock_quantity',queryProdutosQTDE.Value.ToString);
+    base_url := 'https://cvcacessorios.com.br/';
+    consumer_key := 'ck_f1b6e8c33b87879ba2b27d9573e2a98f07f4c269';
+    consumer_secret := 'cs_7a0bf264d6f1871c765b89d7eecccabacbc19088';
 
+    if edit = false then
+    begin
+      restRequest.Method := rmPOST;
+      url_api := 'wp-json/wc/v3/products/';
+      JSON.AddPair('name', '#Saga ' + queryProdutosPROD_DESCRICAO.Value);
+      JSON.AddPair('type', 'simple');
+      JSON.AddPair('regular_price', queryProdutosPROD_CMV.Value.ToString);
+      JSON.AddPair('status', 'pending');
+      JSON.AddPair('sku', queryProdutosCOD_PRODUTO.Value.ToString);
+      JSON.AddPair('manage_stock', 'true');
+      JSON.AddPair('stock_quantity', queryProdutosQTDE.Value.ToString);
 
-restClient.BaseURL:='https://cvcacessorios.com.br/wp-json/wc/v3/products/?consumer_key=ck_f1b6e8c33b87879ba2b27d9573e2a98f07f4c269&consumer_secret=cs_7a0bf264d6f1871c765b89d7eecccabacbc19088';
-restRequest.AddBody(json);
-memoJson.Text:=json.ToString;
-restRequest.Execute;
-memoResponse.Text:=restResponse.JSONText;
+      restClient.BaseURL := base_url + url_api + '?consumer_key=' + consumer_key
+        + '&consumer_secret=' + consumer_secret;
+
+      restRequest.AddBody(JSON);
+      memoJson.Text := JSON.ToString;
+      restRequest.Execute;
+      Response := restResponse.JSONValue as TJSONObject;
+      memoResponse.Text := Response.Values['id'].Value;
+      queryProdutosCOD_SITE.AsInteger := Response.Values['id'].Value.ToInteger;
+    end
+    else
+    begin
+      restRequest.Method := rmPUT;
+      url_api := '/wp-json/wc/v3/products/' + queryProdutosCOD_SITE.value.ToString;
+      JSON.AddPair('name', '#EDITSaga ' + queryProdutosPROD_DESCRICAO.Value);
+      JSON.AddPair('type', 'simple');
+      JSON.AddPair('regular_price', queryProdutosPROD_CMV.Value.ToString);
+      JSON.AddPair('status', 'pending');
+      JSON.AddPair('sku', queryProdutosCOD_PRODUTO.Value.ToString);
+      JSON.AddPair('manage_stock', 'true');
+      JSON.AddPair('stock_quantity', queryProdutosQTDE.Value.ToString);
+
+      restClient.BaseURL := base_url + url_api + '?consumer_key=' + consumer_key
+        + '&consumer_secret=' + consumer_secret;
+
+      restRequest.AddBody(JSON);
+      memoJson.Text := JSON.ToString;
+      restRequest.Execute;
+      Response := restResponse.JSONValue as TJSONObject;
+    end;
+
+  end;
+  queryProdutos.Post
 end;
 
-procedure TfrmCadastroProduto.BitBtn4Click(Sender: TObject);
+procedure TfrmCadastroProduto.btnPesquisaClick(Sender: TObject);
 begin
-  memoJson.Text:='';
- memoResponse.Text:='';
+  memoJson.Text := '';
+  memoResponse.Text := '';
 end;
 
 procedure TfrmCadastroProduto.bntEditarClick(Sender: TObject);
 begin
-queryProdutos.Edit;
+  base_url := 'https://cvcacessorios.com.br/';
+  consumer_key := 'ck_f1b6e8c33b87879ba2b27d9573e2a98f07f4c269';
+  consumer_secret := 'cs_7a0bf264d6f1871c765b89d7eecccabacbc19088';
+  edit := True;
+  queryProdutos.edit;
 end;
 
 end.

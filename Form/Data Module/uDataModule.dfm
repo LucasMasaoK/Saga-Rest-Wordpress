@@ -1,7 +1,6 @@
 object DataModule1: TDataModule1
-  Height = 750
-  Width = 1000
-  PixelsPerInch = 120
+  Height = 600
+  Width = 800
   object bancoConexao: TFDConnection
     Params.Strings = (
       
@@ -12,12 +11,12 @@ object DataModule1: TDataModule1
       'DriverID=FB')
     Connected = True
     Transaction = bancoTransacao
-    Left = 768
-    Top = 480
+    Left = 614
+    Top = 384
   end
   object bancoTransacao: TFDTransaction
     Connection = bancoConexao
-    Left = 864
-    Top = 496
+    Left = 691
+    Top = 397
   end
 end
