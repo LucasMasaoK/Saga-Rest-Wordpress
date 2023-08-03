@@ -263,7 +263,6 @@ object frmCadastroProduto: TfrmCadastroProduto
     Top = 184
   end
   object restClient: TRESTClient
-    Authenticator = SimpleAuthenticator1
     Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
     AcceptCharset = 'utf-8, *;q=0.8'
     ContentType = ' application/json'
@@ -272,13 +271,8 @@ object frmCadastroProduto: TfrmCadastroProduto
     Left = 432
     Top = 280
   end
-  object SimpleAuthenticator1: TSimpleAuthenticator
-    Username = 'ck_f1b6e8c33b87879ba2b27d9573e2a98f07f4c269'
-    Password = 'cs_7a0bf264d6f1871c765b89d7eecccabacbc19088'
-    Left = 528
-    Top = 208
-  end
   object restResponse: TRESTResponse
+    ContentType = ' application/json'
     Left = 520
     Top = 304
   end
