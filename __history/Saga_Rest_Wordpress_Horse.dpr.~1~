@@ -1,0 +1,12 @@
+program Saga_Rest_Wordpress_Horse;
+
+uses
+  Vcl.Forms,
+  uHorse in 'Form\uHorse.pas' {FrmMain};
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TFrmMain, FrmMain);
+  Application.Run;
+end.

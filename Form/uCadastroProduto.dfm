@@ -67,7 +67,7 @@ object frmCadastroProduto: TfrmCadastroProduto
     FocusControl = DBEdit2
   end
   object Label8: TLabel
-    Left = 464
+    Left = 152
     Top = 32
     Width = 123
     Height = 15
@@ -85,7 +85,7 @@ object frmCadastroProduto: TfrmCadastroProduto
   object editNome: TDBEdit
     Left = 8
     Top = 96
-    Width = 500
+    Width = 473
     Height = 23
     DataField = 'PROD_DESCRICAO'
     DataSource = sourceProdutos
@@ -116,8 +116,8 @@ object frmCadastroProduto: TfrmCadastroProduto
     Height = 74
     Align = alBottom
     TabOrder = 4
-    ExplicitTop = 367
-    ExplicitWidth = 624
+    ExplicitTop = 359
+    ExplicitWidth = 622
     object BitBtn1: TBitBtn
       Left = 16
       Top = 16
@@ -185,7 +185,7 @@ object frmCadastroProduto: TfrmCadastroProduto
     TabOrder = 7
   end
   object comboSite: TComboBox
-    Left = 464
+    Left = 152
     Top = 48
     Width = 145
     Height = 23
@@ -204,6 +204,23 @@ object frmCadastroProduto: TfrmCadastroProduto
     DataField = 'PROD_DESCRICAO'
     DataSource = sourceProdutos
     TabOrder = 9
+  end
+  object Panel2: TPanel
+    Left = 504
+    Top = 0
+    Width = 124
+    Height = 368
+    Align = alRight
+    TabOrder = 10
+    object btnProdutos: TBitBtn
+      Left = 8
+      Top = 16
+      Width = 105
+      Height = 41
+      Caption = 'Produtos sem rela'#231#227'o'
+      TabOrder = 0
+      OnClick = btnProdutosClick
+    end
   end
   object queryProdutos: TFDQuery
     Active = True

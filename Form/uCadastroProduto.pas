@@ -11,7 +11,7 @@ uses
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Mask,
   Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Buttons, REST.Types, REST.Client,
   Data.Bind.Components, Data.Bind.ObjectScope, System.JSON,
-  REST.Authenticator.Simple, REST.Response.Adapter;
+  REST.Authenticator.Simple, REST.Response.Adapter, uModelConsulta;
 
 type
   TfrmCadastroProduto = class(TForm)
@@ -48,10 +48,13 @@ type
     Label8: TLabel;
     comboSite: TComboBox;
     DBLookupComboBox1: TDBLookupComboBox;
+    Panel2: TPanel;
+    btnProdutos: TBitBtn;
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure bntEditarClick(Sender: TObject);
     procedure btnPesquisaClick(Sender: TObject);
+    procedure btnProdutosClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -163,6 +166,11 @@ procedure TfrmCadastroProduto.btnPesquisaClick(Sender: TObject);
 begin
   memoJson.Text := '';
   memoResponse.Text := '';
+end;
+
+procedure TfrmCadastroProduto.btnProdutosClick(Sender: TObject);
+begin
+frmConsulta.ShowModal;
 end;
 
 procedure TfrmCadastroProduto.bntEditarClick(Sender: TObject);

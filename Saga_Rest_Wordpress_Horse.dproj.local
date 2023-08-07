@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2023/06/27 14:13:10.000.475,=C:\Users\Lucas Marques\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2023/06/27 14:17:16.000.125,=C:\Users\Lucas Marques\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2023/06/27 14:27:11.000.562,=C:\Users\Lucas Marques\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2023/06/27 14:28:41.000.252,=C:\Users\Lucas Marques\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2023/08/04 09:59:21.000.352,=C:\Users\Lucas Marques\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2023/08/04 09:59:39.000.146,C:\Users\Lucas Marques\Documents\Embarcadero\Studio\Projects\Unit2.pas=C:\Users\Lucas Marques\Documents\Cursos\Delphi Rest Saga\Saga-Rest-Wordpress\Form\uHorse.pas</Transaction>
+    <Transaction>2023/08/04 09:59:39.000.146,C:\Users\Lucas Marques\Documents\Embarcadero\Studio\Projects\Unit2.dfm=C:\Users\Lucas Marques\Documents\Cursos\Delphi Rest Saga\Saga-Rest-Wordpress\Form\uHorse.dfm</Transaction>
+    <Transaction>2023/08/04 09:59:59.000.946,C:\Users\Lucas Marques\Documents\Embarcadero\Studio\Projects\Project2.dproj=C:\Users\Lucas Marques\Documents\Cursos\Delphi Rest Saga\Saga-Rest-Wordpress\Saga_Rest_Wordpress_Horse.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
