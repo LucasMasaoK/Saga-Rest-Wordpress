@@ -10,7 +10,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
-  REST.Response.Adapter;
+  REST.Response.Adapter, Vcl.StdCtrls, Vcl.Buttons;
 
 type
   TfrmConsulta = class(TForm)
@@ -22,7 +22,13 @@ type
     DBGrid1: TDBGrid;
     FDMemTable1: TFDMemTable;
     DataSource1: TDataSource;
+    RadioGroup1: TRadioGroup;
+    editPesquisa: TEdit;
+    btnPesquisar: TBitBtn;
+    btnEditarr: TBitBtn;
     procedure FormCreate(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
+    procedure DBGrid1CellClick(Column: TColumn);
   private
     { Private declarations }
   public
@@ -35,7 +41,24 @@ var
 
 implementation
 
+uses uCadastroProduto;
 {$R *.dfm}
+
+procedure TfrmConsulta.btnPesquisarClick(Sender: TObject);
+begin
+
+  restClient.BaseURL := base_url + url_api + '&search=' + editPesquisa.Text +
+    '&consumer_key=' + consumer_key + '&consumer_secret=' + consumer_secret;
+  restRequest.Execute;
+end;
+
+procedure TfrmConsulta.DBGrid1CellClick(Column: TColumn);
+begin
+  var
+    teste: string;
+  frmCadastroProduto.editIdSite.Text := DBGrid1.columns.items[0].field.Text;
+ close;
+end;
 
 procedure TfrmConsulta.FormCreate(Sender: TObject);
 begin
@@ -44,8 +67,6 @@ begin
   consumer_secret := 'cs_7a0bf264d6f1871c765b89d7eecccabacbc19088';
   url_api := 'wp-json/wc/v3/products/?sku=&status=publish&per_page=50';
 
-  restClient.BaseURL:=base_url+url_api+'&consumer_key='+consumer_key+'&consumer_secret='+consumer_secret;
-  restRequest.Execute;
 end;
 
 end.

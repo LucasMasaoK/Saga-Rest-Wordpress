@@ -16,19 +16,51 @@ object frmConsulta: TfrmConsulta
     Left = 0
     Top = 0
     Width = 665
-    Height = 41
+    Height = 113
     Align = alTop
-    Caption = 'Panel1'
     TabOrder = 0
-    ExplicitLeft = 128
-    ExplicitTop = 32
-    ExplicitWidth = 185
+    ExplicitWidth = 659
+    object RadioGroup1: TRadioGroup
+      Left = 16
+      Top = 32
+      Width = 185
+      Height = 41
+      ItemIndex = 0
+      Items.Strings = (
+        'Nome')
+      TabOrder = 0
+    end
+    object editPesquisa: TEdit
+      Left = 216
+      Top = 32
+      Width = 185
+      Height = 23
+      TabOrder = 1
+      TextHint = 'Digite o termo de pesquisa....'
+    end
+    object btnPesquisar: TBitBtn
+      Left = 432
+      Top = 31
+      Width = 83
+      Height = 49
+      Caption = 'Pesquisar'
+      TabOrder = 2
+      OnClick = btnPesquisarClick
+    end
+    object btnEditarr: TBitBtn
+      Left = 544
+      Top = 31
+      Width = 83
+      Height = 49
+      Caption = 'Editar'
+      TabOrder = 3
+    end
   end
   object DBGrid1: TDBGrid
     Left = 0
-    Top = 41
+    Top = 113
     Width = 665
-    Height = 489
+    Height = 417
     Align = alClient
     DataSource = DataSource1
     TabOrder = 1
@@ -37,6 +69,7 @@ object frmConsulta: TfrmConsulta
     TitleFont.Height = -12
     TitleFont.Name = 'Segoe UI'
     TitleFont.Style = []
+    OnCellClick = DBGrid1CellClick
     Columns = <
       item
         Expanded = False
@@ -47,7 +80,7 @@ object frmConsulta: TfrmConsulta
       item
         Expanded = False
         FieldName = 'name'
-        Width = 150
+        Width = 800
         Visible = True
       end
       item

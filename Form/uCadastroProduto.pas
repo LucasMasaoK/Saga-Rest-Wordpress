@@ -44,7 +44,7 @@ type
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
-    DBEdit2: TDBEdit;
+    editIdSite: TDBEdit;
     Label8: TLabel;
     comboSite: TComboBox;
     DBLookupComboBox1: TDBLookupComboBox;
@@ -55,11 +55,16 @@ type
     procedure bntEditarClick(Sender: TObject);
     procedure btnPesquisaClick(Sender: TObject);
     procedure btnProdutosClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure editIdSiteChange(Sender: TObject);
   private
     { Private declarations }
   public
     edit: Boolean;
-    base_url, url_api, consumer_key, consumer_secret: String;
+    base_url, url_api, consumer_key, consumer_secret,id_site: String;
+
+
   end;
 
 var
@@ -173,10 +178,26 @@ begin
 frmConsulta.ShowModal;
 end;
 
+procedure TfrmCadastroProduto.editIdSiteChange(Sender: TObject);
+begin
+comboSite.ItemIndex:=0;
+end;
+
+procedure TfrmCadastroProduto.FormActivate(Sender: TObject);
+begin
+editIdSite.Text:=id_site;
+end;
+
+procedure TfrmCadastroProduto.FormShow(Sender: TObject);
+begin
+editIdSite.Text:=id_site;
+end;
+
 procedure TfrmCadastroProduto.bntEditarClick(Sender: TObject);
 begin
 
   queryProdutos.edit;
+
 end;
 
 end.

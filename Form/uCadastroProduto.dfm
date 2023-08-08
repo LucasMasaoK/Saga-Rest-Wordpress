@@ -11,6 +11,7 @@ object frmCadastroProduto: TfrmCadastroProduto
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poMainFormCenter
+  OnActivate = FormActivate
   TextHeight = 15
   object Label1: TLabel
     Left = 8
@@ -64,7 +65,7 @@ object frmCadastroProduto: TfrmCadastroProduto
     Width = 51
     Height = 15
     Caption = 'COD_SITE'
-    FocusControl = DBEdit2
+    FocusControl = editIdSite
   end
   object Label8: TLabel
     Left = 152
@@ -175,7 +176,7 @@ object frmCadastroProduto: TfrmCadastroProduto
       'memoJson')
     TabOrder = 6
   end
-  object DBEdit2: TDBEdit
+  object editIdSite: TDBEdit
     Left = 67
     Top = 48
     Width = 40
@@ -183,6 +184,7 @@ object frmCadastroProduto: TfrmCadastroProduto
     DataField = 'COD_SITE'
     DataSource = sourceProdutos
     TabOrder = 7
+    OnChange = editIdSiteChange
   end
   object comboSite: TComboBox
     Left = 152
@@ -212,12 +214,15 @@ object frmCadastroProduto: TfrmCadastroProduto
     Height = 368
     Align = alRight
     TabOrder = 10
+    ExplicitLeft = 498
+    ExplicitHeight = 359
     object btnProdutos: TBitBtn
-      Left = 8
-      Top = 16
-      Width = 105
+      Left = 6
+      Top = 17
+      Width = 113
       Height = 41
-      Caption = 'Produtos sem rela'#231#227'o'
+      Cancel = True
+      Caption = 'Consulta Prod Site'
       TabOrder = 0
       OnClick = btnProdutosClick
     end
