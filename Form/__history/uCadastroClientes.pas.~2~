@@ -1,0 +1,30 @@
+unit uCadastroClientes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
+  uModelConsulta;
+
+type
+  TfrmCadastroCliente = class(TForm)
+    Panel1: TPanel;
+    BitBtn1: TBitBtn;
+    bntEditar: TBitBtn;
+    BitBtn3: TBitBtn;
+    btnPesquisa: TBitBtn;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastroCliente: TfrmCadastroCliente;
+
+implementation
+
+{$R *.dfm}
+
+end.

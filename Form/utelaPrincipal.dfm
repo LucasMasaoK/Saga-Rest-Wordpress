@@ -23,5 +23,9 @@ object frmPrincipal: TfrmPrincipal
       Caption = 'Produto'
       OnClick = menuProdutoClick
     end
+    object Cliente1: TMenuItem
+      Caption = 'Cliente'
+      OnClick = Cliente1Click
+    end
   end
 end

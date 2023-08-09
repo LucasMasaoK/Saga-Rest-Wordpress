@@ -5,7 +5,9 @@ uses
   utelaPrincipal in 'Form\utelaPrincipal.pas' {frmPrincipal},
   uCadastroProduto in 'Form\uCadastroProduto.pas' {frmCadastroProduto},
   uDataModule in 'Form\Data Module\uDataModule.pas' {DataModule1: TDataModule},
-  uModelConsulta in 'Form\uModelConsulta.pas' {frmConsulta};
+  uModelConsulta in 'Form\uModelConsulta.pas' {frmConsulta},
+  uCadastroClientes in 'Form\uCadastroClientes.pas' {frmCadastroCliente},
+  uConsultaClientes in 'Form\uConsultaClientes.pas' {frmConsultaCliente};
 
 {$R *.res}
 
@@ -16,5 +18,7 @@ begin
   Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(TfrmCadastroProduto, frmCadastroProduto);
   Application.CreateForm(TfrmConsulta, frmConsulta);
+  Application.CreateForm(TfrmCadastroCliente, frmCadastroCliente);
+  Application.CreateForm(TfrmConsultaCliente, frmConsultaCliente);
   Application.Run;
 end.
