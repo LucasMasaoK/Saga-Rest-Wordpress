@@ -56,7 +56,8 @@ procedure TfrmConsulta.DBGrid1CellClick(Column: TColumn);
 begin
   var
     teste: string;
-  frmCadastroProduto.editIdSite.Text := DBGrid1.columns.items[0].field.Text;
+  frmCadastroProduto.queryProdutosCOD_SITE.Value:= DBGrid1.columns.items[0].field.Text.ToInteger;
+  frmCadastroProduto.queryProdutosPROD_DESCRICAO_SITE.Value := DBGrid1.columns.items[1].field.Text;
  close;
 end;
 

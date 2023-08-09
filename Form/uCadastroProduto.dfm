@@ -2,8 +2,8 @@ object frmCadastroProduto: TfrmCadastroProduto
   Left = 0
   Top = 0
   Caption = 'Cadastro de Produto'
-  ClientHeight = 442
-  ClientWidth = 628
+  ClientHeight = 518
+  ClientWidth = 635
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -31,7 +31,7 @@ object frmCadastroProduto: TfrmCadastroProduto
   end
   object Label3: TLabel
     Left = 8
-    Top = 128
+    Top = 171
     Width = 28
     Height = 15
     Caption = 'QTDE'
@@ -39,7 +39,7 @@ object frmCadastroProduto: TfrmCadastroProduto
   end
   object Label4: TLabel
     Left = 8
-    Top = 176
+    Top = 219
     Width = 62
     Height = 15
     Caption = 'PROD_CMV'
@@ -74,6 +74,13 @@ object frmCadastroProduto: TfrmCadastroProduto
     Height = 15
     Caption = 'Cadastrar Produto Site?'
   end
+  object Label9: TLabel
+    Left = 8
+    Top = 125
+    Width = 79
+    Height = 15
+    Caption = 'PRODUTO_SITE'
+  end
   object DBEdit1: TDBEdit
     Left = 8
     Top = 48
@@ -94,7 +101,7 @@ object frmCadastroProduto: TfrmCadastroProduto
   end
   object DBEdit3: TDBEdit
     Left = 8
-    Top = 144
+    Top = 187
     Width = 40
     Height = 23
     DataField = 'QTDE'
@@ -103,7 +110,7 @@ object frmCadastroProduto: TfrmCadastroProduto
   end
   object DBEdit4: TDBEdit
     Left = 8
-    Top = 192
+    Top = 235
     Width = 154
     Height = 23
     DataField = 'PROD_CMV'
@@ -112,8 +119,8 @@ object frmCadastroProduto: TfrmCadastroProduto
   end
   object Panel1: TPanel
     Left = 0
-    Top = 368
-    Width = 628
+    Top = 444
+    Width = 635
     Height = 74
     Align = alBottom
     TabOrder = 4
@@ -159,8 +166,8 @@ object frmCadastroProduto: TfrmCadastroProduto
     end
   end
   object memoJson: TMemo
-    Left = 224
-    Top = 224
+    Left = 216
+    Top = 291
     Width = 185
     Height = 89
     Lines.Strings = (
@@ -168,8 +175,8 @@ object frmCadastroProduto: TfrmCadastroProduto
     TabOrder = 5
   end
   object memoResponse: TMemo
-    Left = 16
-    Top = 240
+    Left = 8
+    Top = 291
     Width = 185
     Height = 89
     Lines.Strings = (
@@ -183,6 +190,7 @@ object frmCadastroProduto: TfrmCadastroProduto
     Height = 23
     DataField = 'COD_SITE'
     DataSource = sourceProdutos
+    Enabled = False
     TabOrder = 7
     OnChange = editIdSiteChange
   end
@@ -198,22 +206,13 @@ object frmCadastroProduto: TfrmCadastroProduto
       'Sim'
       'N'#227'o')
   end
-  object DBLookupComboBox1: TDBLookupComboBox
-    Left = 336
-    Top = 160
-    Width = 145
-    Height = 23
-    DataField = 'PROD_DESCRICAO'
-    DataSource = sourceProdutos
-    TabOrder = 9
-  end
   object Panel2: TPanel
-    Left = 504
+    Left = 511
     Top = 0
     Width = 124
-    Height = 368
+    Height = 444
     Align = alRight
-    TabOrder = 10
+    TabOrder = 9
     ExplicitLeft = 498
     ExplicitHeight = 359
     object btnProdutos: TBitBtn
@@ -227,13 +226,23 @@ object frmCadastroProduto: TfrmCadastroProduto
       OnClick = btnProdutosClick
     end
   end
+  object editNomeSite: TDBEdit
+    Left = 8
+    Top = 142
+    Width = 473
+    Height = 23
+    DataField = 'PROD_DESCRICAO_SITE'
+    DataSource = sourceProdutos
+    TabOrder = 10
+  end
   object queryProdutos: TFDQuery
     Active = True
     Connection = DataModule1.bancoConexao
     SQL.Strings = (
       'SELECT'
       'COD_PRODUTO,'
-      'PROD_DESCRICAO,'
+      'PROD_DESCRICAO, '
+      'PROD_DESCRICAO_SITE,'
       'QTDE,'
       'PROD_CMV,'
       'COD_SITE,'
@@ -269,6 +278,11 @@ object frmCadastroProduto: TfrmCadastroProduto
       FieldName = 'PRODUTO_SITE'
       Origin = 'PRODUTO_SITE'
     end
+    object queryProdutosPROD_DESCRICAO_SITE: TStringField
+      FieldName = 'PROD_DESCRICAO_SITE'
+      Origin = 'PROD_DESCRICAO_SITE'
+      Size = 250
+    end
   end
   object sourceProdutos: TDataSource
     DataSet = queryProdutos
@@ -281,8 +295,8 @@ object frmCadastroProduto: TfrmCadastroProduto
     Params = <>
     Response = restResponse
     SynchronizedEvents = False
-    Left = 432
-    Top = 184
+    Left = 536
+    Top = 232
   end
   object restClient: TRESTClient
     Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
@@ -290,8 +304,8 @@ object frmCadastroProduto: TfrmCadastroProduto
     ContentType = ' application/json'
     Params = <>
     SynchronizedEvents = False
-    Left = 432
-    Top = 280
+    Left = 456
+    Top = 296
   end
   object restResponse: TRESTResponse
     ContentType = ' application/json'
