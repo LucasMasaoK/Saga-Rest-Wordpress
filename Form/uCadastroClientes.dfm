@@ -50,8 +50,8 @@ object frmCadastroCliente: TfrmCadastroCliente
     Height = 74
     Align = alBottom
     TabOrder = 0
-    ExplicitLeft = -7
-    ExplicitWidth = 635
+    ExplicitTop = 359
+    ExplicitWidth = 622
     object BitBtn1: TBitBtn
       Left = 16
       Top = 16
@@ -60,7 +60,6 @@ object frmCadastroCliente: TfrmCadastroCliente
       Caption = 'Novo'
       DisabledImageName = 'btnNovo'
       TabOrder = 0
-      OnClick = BitBtn1Click
     end
     object bntEditar: TBitBtn
       Left = 128
@@ -133,8 +132,8 @@ object frmCadastroCliente: TfrmCadastroCliente
     Height = 368
     Align = alRight
     TabOrder = 5
-    ExplicitTop = -2
-    ExplicitHeight = 444
+    ExplicitLeft = 498
+    ExplicitHeight = 359
     object btnProdutos: TBitBtn
       Left = 6
       Top = 17
@@ -145,6 +144,15 @@ object frmCadastroCliente: TfrmCadastroCliente
       TabOrder = 0
       OnClick = btnProdutosClick
     end
+  end
+  object Memo1: TMemo
+    Left = 56
+    Top = 208
+    Width = 185
+    Height = 89
+    Lines.Strings = (
+      'Memo1')
+    TabOrder = 6
   end
   object queryClientes: TFDQuery
     Active = True
@@ -181,5 +189,30 @@ object frmCadastroCliente: TfrmCadastroCliente
     DataSet = queryClientes
     Left = 512
     Top = 288
+  end
+  object restClient: TRESTClient
+    Authenticator = HTTPBasicAuthenticator
+    Params = <>
+    SynchronizedEvents = False
+    Left = 280
+    Top = 224
+  end
+  object restRequest: TRESTRequest
+    Client = restClient
+    Params = <>
+    Response = restResponse
+    SynchronizedEvents = False
+    Left = 368
+    Top = 224
+  end
+  object restResponse: TRESTResponse
+    Left = 456
+    Top = 224
+  end
+  object HTTPBasicAuthenticator: THTTPBasicAuthenticator
+    Username = 'ck_f1b6e8c33b87879ba2b27d9573e2a98f07f4c269'
+    Password = 'cs_7a0bf264d6f1871c765b89d7eecccabacbc19088'
+    Left = 408
+    Top = 176
   end
 end

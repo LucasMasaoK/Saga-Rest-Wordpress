@@ -8,7 +8,9 @@ uses
   uModelConsulta, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, uDataModule, Vcl.Mask, Vcl.DBCtrls, uConsultaClientes;
+  FireDAC.Comp.Client, uDataModule, Vcl.Mask, Vcl.DBCtrls, uConsultaClientes,
+  REST.Types, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
+  REST.Authenticator.Basic, System.JSON;
 
 type
   TfrmCadastroCliente = class(TForm)
@@ -33,7 +35,11 @@ type
     DBEdit4: TDBEdit;
     Panel2: TPanel;
     btnProdutos: TBitBtn;
-    procedure BitBtn1Click(Sender: TObject);
+    restClient: TRESTClient;
+    restRequest: TRESTRequest;
+    restResponse: TRESTResponse;
+    HTTPBasicAuthenticator: THTTPBasicAuthenticator;
+    Memo1: TMemo;
     procedure bntEditarClick(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure btnProdutosClick(Sender: TObject);
@@ -50,14 +56,25 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrmCadastroCliente.BitBtn1Click(Sender: TObject);
-begin
-queryClientes.Append;
-end;
-
 procedure TfrmCadastroCliente.BitBtn3Click(Sender: TObject);
 begin
 queryClientes.Post;
+
+var jsonBody:TJSONObject;
+queryClientes.edit;
+restClient.BaseURL:='https://cvcacessorios.com.br/wp-json/wc/v3/customers/'+queryClientesCOD_SITE.Value;
+restRequest.Method:=rmPUT;
+restClient.ContentType:='application/json';
+
+jsonBody:= TJSONObject.Create;
+jsonBody.AddPair('first_name',queryClientesCOD_CLIENTE.Value.ToString);
+restRequest.AddBody(jsonBody);
+try
+ restRequest.Execute;
+except
+
+end;
+Memo1.Text:=restResponse.JSONText;
 end;
 
 procedure TfrmCadastroCliente.bntEditarClick(Sender: TObject);

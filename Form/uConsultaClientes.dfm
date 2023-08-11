@@ -11,7 +11,7 @@ object frmConsultaCliente: TfrmConsultaCliente
   Font.Name = 'Segoe UI'
   Font.Style = []
   TextHeight = 15
-  object DBGrid1: TDBGrid
+  object gridClientes: TDBGrid
     Left = 0
     Top = 113
     Width = 1114
@@ -24,6 +24,7 @@ object frmConsultaCliente: TfrmConsultaCliente
     TitleFont.Height = -12
     TitleFont.Name = 'Segoe UI'
     TitleFont.Style = []
+    OnCellClick = gridClientesCellClick
     Columns = <
       item
         Expanded = False
@@ -63,8 +64,7 @@ object frmConsultaCliente: TfrmConsultaCliente
     Height = 113
     Align = alTop
     TabOrder = 1
-    ExplicitLeft = -37
-    ExplicitWidth = 665
+    ExplicitWidth = 1108
     object editPesquisa: TEdit
       Left = 16
       Top = 44
@@ -80,6 +80,7 @@ object frmConsultaCliente: TfrmConsultaCliente
       Height = 49
       Caption = 'Pesquisar'
       TabOrder = 1
+      OnClick = btnPesquisarClick
     end
     object btnEditarr: TBitBtn
       Left = 544

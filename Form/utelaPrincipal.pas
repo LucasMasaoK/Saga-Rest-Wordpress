@@ -31,6 +31,7 @@ uses uCadastroProduto;
 procedure TfrmPrincipal.Cliente1Click(Sender: TObject);
 begin
     frmCadastroCliente.ShowModal;
+
 end;
 
 procedure TfrmPrincipal.menuProdutoClick(Sender: TObject);

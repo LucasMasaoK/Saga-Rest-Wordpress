@@ -18,7 +18,7 @@ type
     restResponse: TRESTResponse;
     restResponseDataSetAdapter: TRESTResponseDataSetAdapter;
     DataSource1: TDataSource;
-    DBGrid1: TDBGrid;
+    gridClientes: TDBGrid;
     FDMemTable1: TFDMemTable;
     FDMemTable1id: TWideStringField;
     FDMemTable1date_created: TWideStringField;
@@ -30,6 +30,8 @@ type
     editPesquisa: TEdit;
     btnPesquisar: TBitBtn;
     btnEditarr: TBitBtn;
+    procedure gridClientesCellClick(Column: TColumn);
+    procedure btnPesquisarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,7 +42,18 @@ var
   frmConsultaCliente: TfrmConsultaCliente;
 
 implementation
-
+ uses uCadastroClientes;
 {$R *.dfm}
+
+procedure TfrmConsultaCliente.btnPesquisarClick(Sender: TObject);
+begin
+restResquest.Execute;
+end;
+
+procedure TfrmConsultaCliente.gridClientesCellClick(Column: TColumn);
+begin
+frmCadastroCliente.queryClientesCOD_SITE.Value:=gridClientes.Fields[0].AsString;
+close;
+end;
 
 end.
