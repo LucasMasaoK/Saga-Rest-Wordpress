@@ -7,7 +7,9 @@ uses
   uDataModule in 'Form\Data Module\uDataModule.pas' {DataModule1: TDataModule},
   uModelConsulta in 'Form\uModelConsulta.pas' {frmConsulta},
   uCadastroClientes in 'Form\uCadastroClientes.pas' {frmCadastroCliente},
-  uConsultaClientes in 'Form\uConsultaClientes.pas' {frmConsultaCliente};
+  uConsultaClientes in 'Form\uConsultaClientes.pas' {frmConsultaCliente},
+  uConsultaVendas in 'Form\uConsultaVendas.pas' {frmConsultaVendas},
+  uCadastroVendas in 'Form\uCadastroVendas.pas' {frmCadastroVendas};
 
 {$R *.res}
 
@@ -20,5 +22,7 @@ begin
   Application.CreateForm(TfrmConsulta, frmConsulta);
   Application.CreateForm(TfrmCadastroCliente, frmCadastroCliente);
   Application.CreateForm(TfrmConsultaCliente, frmConsultaCliente);
+  Application.CreateForm(TfrmConsultaVendas, frmConsultaVendas);
+  Application.CreateForm(TfrmCadastroVendas, frmCadastroVendas);
   Application.Run;
 end.

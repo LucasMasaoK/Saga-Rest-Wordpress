@@ -125,6 +125,14 @@
             <Form>frmConsultaCliente</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Form\uConsultaVendas.pas">
+            <Form>frmConsultaVendas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Form\uCadastroVendas.pas">
+            <Form>frmCadastroVendas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
