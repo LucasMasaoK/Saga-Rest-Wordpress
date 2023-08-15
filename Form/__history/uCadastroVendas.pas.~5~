@@ -1,0 +1,105 @@
+unit uCadastroVendas;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
+  uConsultaVendas, uDataModule, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, system.JSON;
+
+type
+  TfrmCadastroVendas = class(TForm)
+    Panel1: TPanel;
+    BitBtn1: TBitBtn;
+    bntEditar: TBitBtn;
+    BitBtn3: TBitBtn;
+    btnPesquisa: TBitBtn;
+    Panel2: TPanel;
+    btnvendas: TBitBtn;
+    queryVendas: TFDQuery;
+    queryVendasDOCUMENTO: TIntegerField;
+    queryVendasCOD_SUBGRUPOCUSTO: TIntegerField;
+    queryVendasCOD_GRUPOCUSTO: TIntegerField;
+    queryVendasCOD_NATUREZA: TCurrencyField;
+    queryVendasCOD_CONDPAGTO: TIntegerField;
+    queryVendasCOD_FUNCIONARIO: TIntegerField;
+    queryVendasCOD_CLIENTE: TIntegerField;
+    queryVendasCOD_EMPRESA: TIntegerField;
+    queryVendasDATALANC: TDateField;
+    queryVendasBASEICMS: TCurrencyField;
+    queryVendasVALORICMS: TCurrencyField;
+    queryVendasBASEICMSSUB: TCurrencyField;
+    queryVendasVALORICMSSUB: TCurrencyField;
+    queryVendasVALORFRETE: TCurrencyField;
+    queryVendasVALORSEGURO: TCurrencyField;
+    queryVendasOUTRASDESPESAS: TCurrencyField;
+    queryVendasVALORTOTALIPI: TCurrencyField;
+    queryVendasVALORISS: TCurrencyField;
+    queryVendasVALORDESCONTO: TFMTBCDField;
+    queryVendasVALORPRODUTOS: TFMTBCDField;
+    queryVendasVALORTOTALPROD: TFMTBCDField;
+    queryVendasVALORTOTALNOTA: TFMTBCDField;
+    queryVendasHORAS: TTimeField;
+    queryVendasCOD_TRANSPORTADORA: TIntegerField;
+    queryVendasCOD_LOCAL: TIntegerField;
+    queryVendasBASEDESCONTO: TFMTBCDField;
+    queryVendasPERCDESCONTO: TFMTBCDField;
+    queryVendasNUMVOLUME: TIntegerField;
+    queryVendasCUPOMFISCAL: TIntegerField;
+    queryVendasPESO: TCurrencyField;
+    queryVendasQTDETOTAL: TCurrencyField;
+    queryVendasCOD_FINANCIADORA: TIntegerField;
+    queryVendasCOD_TABELA: TIntegerField;
+    queryVendasNO_PARCELAS: TSmallintField;
+    queryVendasCARENCIA: TSmallintField;
+    queryVendasCOD_CARTAO: TIntegerField;
+    queryVendasCOD_FORMAPAGTO: TIntegerField;
+    queryVendasCOD_TABPRECO: TIntegerField;
+    queryVendasNUMERO_CONTRATO: TStringField;
+    queryVendasCOD_EMBALAGEM: TIntegerField;
+    queryVendasUSUARIO: TStringField;
+    queryVendasDTDIGITACAO: TDateField;
+    queryVendasTIPOFRETE: TStringField;
+    queryVendasDATAENTREGA: TDateField;
+    queryVendasCOD_IMPORTACAO: TIntegerField;
+    queryVendasNO_PEDIDO: TIntegerField;
+    queryVendasBASEOUTROS: TCurrencyField;
+    queryVendasVALOROUTROS: TCurrencyField;
+    queryVendasOBSERVACAO: TMemoField;
+    queryVendasOBSERVACAO_1: TStringField;
+    queryVendasOBSERVACAO_2: TStringField;
+    queryVendasOBSERVACAO_3: TStringField;
+    queryVendasVALORDESCDEVOLUCAO: TCurrencyField;
+    queryVendasHISTORICO_DEVOLUCAO: TStringField;
+    queryVendasVALORPROMOCAO: TFMTBCDField;
+    queryVendasVALORPROMOCAO_PERC: TFMTBCDField;
+    queryVendasPROT_DATA: TDateField;
+    queryVendasPROT_HORA: TTimeField;
+    queryVendasPROT_CHECK: TIntegerField;
+    queryVendasPROT_USUARIO: TStringField;
+    queryVendasNOME_CONSUMIDOR: TStringField;
+    queryVendasSTATUS: TStringField;
+    procedure btnvendasClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastroVendas: TfrmCadastroVendas;
+  arrayItens:TJSONObject;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmCadastroVendas.btnvendasClick(Sender: TObject);
+begin
+frmConsultaVendas.ShowModal;
+end;
+
+end.

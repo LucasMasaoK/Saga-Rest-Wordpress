@@ -124,8 +124,8 @@ object frmCadastroProduto: TfrmCadastroProduto
     Height = 74
     Align = alBottom
     TabOrder = 4
-    ExplicitTop = 359
-    ExplicitWidth = 622
+    ExplicitTop = 435
+    ExplicitWidth = 629
     object BitBtn1: TBitBtn
       Left = 16
       Top = 16
@@ -213,8 +213,8 @@ object frmCadastroProduto: TfrmCadastroProduto
     Height = 444
     Align = alRight
     TabOrder = 9
-    ExplicitLeft = 498
-    ExplicitHeight = 359
+    ExplicitLeft = 505
+    ExplicitHeight = 435
     object btnProdutos: TBitBtn
       Left = 6
       Top = 17
@@ -247,7 +247,7 @@ object frmCadastroProduto: TfrmCadastroProduto
       'PROD_CMV,'
       'COD_SITE,'
       'PRODUTO_SITE'
-      'FROM PRODUTOS WHERE COD_PRODUTO=690;')
+      'FROM PRODUTOS WHERE COD_PRODUTO=691;')
     Left = 496
     Top = 368
     object queryProdutosCOD_PRODUTO: TIntegerField

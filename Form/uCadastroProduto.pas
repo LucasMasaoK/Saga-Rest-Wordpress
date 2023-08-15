@@ -158,7 +158,7 @@ begin
     JSON.AddPair('name', queryProdutosPROD_DESCRICAO_SITE.Value);
     JSON.AddPair('regular_price', queryProdutosPROD_CMV.Value.ToString);
     JSON.AddPair('stock_quantity', queryProdutosQTDE.Value.ToString);
-
+    JSON.AddPair('sku', queryProdutosCOD_PRODUTO.Value.ToString);
     restClient.BaseURL := base_url + url_api + '?consumer_key=' + consumer_key +
       '&consumer_secret=' + consumer_secret;
 

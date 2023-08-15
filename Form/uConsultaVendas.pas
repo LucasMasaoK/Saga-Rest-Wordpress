@@ -3,13 +3,14 @@ unit uConsultaVendas;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
   Data.DB, Vcl.Grids, Vcl.DBGrids, REST.Types, REST.Response.Adapter,
   REST.Client, Data.Bind.Components, Data.Bind.ObjectScope, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, system.JSON;
+  FireDAC.Comp.Client, System.JSON, FireDAC.Stan.Async, FireDAC.DApt;
 
 type
   TfrmConsultaVendas = class(TForm)
@@ -56,6 +57,8 @@ type
     FDMemTable1is_editable: TWideStringField;
     FDMemTable1needs_payment: TWideStringField;
     FDMemTable1needs_processing: TWideStringField;
+    Memo1: TMemo;
+    queryCliente: TFDQuery;
     procedure dbVendasCellClick(Column: TColumn);
     procedure btnPesquisarClick(Sender: TObject);
   private
@@ -71,16 +74,33 @@ implementation
 
 {$R *.dfm}
 
+uses uCadastroVendas, uDataModule;
+
 procedure TfrmConsultaVendas.btnPesquisarClick(Sender: TObject);
 begin
-RESTRequest1.Execute;
+  RESTRequest1.Execute;
+
 end;
 
 procedure TfrmConsultaVendas.dbVendasCellClick(Column: TColumn);
 begin
-var jsonProdutos: TJSonValue;
-jsonProdutos:= TJSONObject.ParseJSONValue(dbVendas.Fields[12].AsString);
-ShowMessage(jsonProdutos.ToString);
+  var
+    jsonProdutos: TJSonValue;
+  jsonProdutos := TJSONObject.ParseJSONValue(dbVendas.Fields[22].AsString);
+  Memo1.Text:= dbVendas.Fields[22].AsString;
+  {queryCliente.Edit;
+  if queryCliente.Locate('COD_SITE', dbVendas.Fields[6].AsInteger) then
+  begin
+    frmCadastroVendas.queryVendasCOD_CLIENTE.Value := dbVendas.Fields[6]
+      .AsInteger;
+    frmConsultaVendas.Close;
+  end
+  else
+  begin
+    ShowMessage('Cliente não encontrado');
+    abort;
+  end;      }
+
 end;
 
 end.

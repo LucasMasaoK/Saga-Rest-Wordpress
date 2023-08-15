@@ -18,7 +18,7 @@ object frmConsultaVendas: TfrmConsultaVendas
     Height = 113
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 622
+    ExplicitWidth = 927
     object editPesquisa: TEdit
       Left = 16
       Top = 44
@@ -44,6 +44,16 @@ object frmConsultaVendas: TfrmConsultaVendas
       Caption = 'Editar'
       TabOrder = 2
     end
+    object Memo1: TMemo
+      Left = 720
+      Top = 32
+      Width = 185
+      Height = 89
+      Lines.Strings = (
+        'Memo1')
+      ScrollBars = ssVertical
+      TabOrder = 3
+    end
   end
   object dbVendas: TDBGrid
     Left = 0
@@ -63,79 +73,161 @@ object frmConsultaVendas: TfrmConsultaVendas
       item
         Expanded = False
         FieldName = 'id'
-        Width = 40
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'parent_id'
-        Width = 40
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'status'
-        Width = 40
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'date_created'
-        Width = 40
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'discount_total'
-        Width = 40
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'total'
-        Width = 40
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'customer_id'
-        Width = 40
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'order_key'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'billing'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'shipping'
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'payment_method'
-        Width = 40
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'payment_method_title'
-        Width = 40
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'transaction_id'
-        Width = 40
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'customer_ip_address'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'customer_user_agent'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'created_via'
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'customer_note'
-        Width = 40
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'date_completed'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'date_paid'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'cart_hash'
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'number'
-        Width = 40
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'meta_data'
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'line_items'
-        Width = 450
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'tax_lines'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'shipping_lines'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'fee_lines'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'coupon_lines'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'refunds'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'payment_url'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'is_editable'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'needs_payment'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'needs_processing'
         Visible = True
       end>
   end
@@ -556,5 +648,13 @@ object frmConsultaVendas: TfrmConsultaVendas
     DataSet = FDMemTable1
     Left = 264
     Top = 304
+  end
+  object queryCliente: TFDQuery
+    Active = True
+    Connection = DataModule1.bancoConexao
+    SQL.Strings = (
+      'SELECT * FROM CLIENTES_PESJURIDICA')
+    Left = 696
+    Top = 360
   end
 end
