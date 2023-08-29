@@ -59,10 +59,12 @@ type
     FDMemTable1needs_processing: TWideStringField;
     Memo1: TMemo;
     queryCliente: TFDQuery;
+    queryProdutos: TFDQuery;
+    queryItensVendas: TFDQuery;
     procedure dbVendasCellClick(Column: TColumn);
     procedure btnPesquisarClick(Sender: TObject);
   private
-    { Private declarations }
+
   public
     { Public declarations }
   end;
@@ -85,21 +87,40 @@ end;
 procedure TfrmConsultaVendas.dbVendasCellClick(Column: TColumn);
 begin
   var
-    jsonProdutos: TJSonValue;
-  jsonProdutos := TJSONObject.ParseJSONValue(dbVendas.Fields[22].AsString);
-  Memo1.Text:= dbVendas.Fields[22].AsString;
-  {queryCliente.Edit;
-  if queryCliente.Locate('COD_SITE', dbVendas.Fields[6].AsInteger) then
-  begin
+  jsonProdutos,idProdutos: TJSONArray;
+  var i:integer;
+  jsonProdutos := TJSONObject.ParseJSONValue(dbVendas.Fields[22].AsString) as TJSONArray;
+
+  queryCliente.Edit;
+
+   for i:=0 to jsonProdutos.Size -1 do
+   begin
+     if queryProdutos.Locate('COD_SITE', jsonProdutos.Get(i).GetValue<integer>('product_id').ToString ) then
+     begin
+     var insert:string;
+     queryItensVendas.SQL.Clear;
+     insert:='INSERT INTO VENDAS_CLIENTES_ITENS(PROD_CLASSFISCAL, PROD_CLASSTRIB, CFOP, VALORPRODUTO QTDE) VALUES (1,1,)';
+     jsonProdutos.Get(i).GetValue<integer>('product_id').ToString;
+
+
+     queryItensVendas.SQL.Add(insert);
+     end;
+
+
+   end;
+
+  //Busca cliente no banco de dados
+  { if queryCliente.Locate('COD_SITE', dbVendas.Fields[6].AsInteger) then
+    begin
     frmCadastroVendas.queryVendasCOD_CLIENTE.Value := dbVendas.Fields[6]
-      .AsInteger;
+    .AsInteger;
     frmConsultaVendas.Close;
-  end
-  else
-  begin
+    end
+    else
+    begin
     ShowMessage('Cliente não encontrado');
     abort;
-  end;      }
+    end; }
 
 end;
 

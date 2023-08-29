@@ -90,7 +90,8 @@ object frmCadastroVendas: TfrmCadastroVendas
     Height = 74
     Align = alBottom
     TabOrder = 0
-    ExplicitLeft = -24
+    ExplicitTop = 469
+    ExplicitWidth = 723
     object BitBtn1: TBitBtn
       Left = 16
       Top = 16
@@ -134,8 +135,8 @@ object frmCadastroVendas: TfrmCadastroVendas
     Height = 478
     Align = alRight
     TabOrder = 1
-    ExplicitLeft = 498
-    ExplicitHeight = 359
+    ExplicitLeft = 599
+    ExplicitHeight = 469
     object btnvendas: TBitBtn
       Left = 6
       Top = 17
@@ -532,7 +533,7 @@ object frmCadastroVendas: TfrmCadastroVendas
     Active = True
     Connection = DataModule1.bancoConexao
     SQL.Strings = (
-      'SELECT * FROM VENDAS_CLIENTES_ITENS')
+      'SELECT * FROM VENDAS_CLIENTES_ITENS WHERE DOCUMENTO=1')
     Left = 416
     Top = 248
     object queryVendaItensCOD_VENDAS_CLIENTES_ITENS: TIntegerField
