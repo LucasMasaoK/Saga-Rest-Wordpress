@@ -59,6 +59,9 @@ type
     FDMemTable1needs_processing: TWideStringField;
     Memo1: TMemo;
     queryCliente: TFDQuery;
+    queryProdutos: TFDQuery;
+    queryItensVendas: TFDQuery;
+    dataItensVendas: TDataSource;
     procedure dbVendasCellClick(Column: TColumn);
     procedure btnPesquisarClick(Sender: TObject);
   private
@@ -79,7 +82,7 @@ uses uCadastroVendas, uDataModule;
 procedure TfrmConsultaVendas.btnPesquisarClick(Sender: TObject);
 begin
   RESTRequest1.Execute;
-  Memo1.Text := dbVendas.Fields[22].AsAnsiString;
+
 end;
 
 procedure TfrmConsultaVendas.dbVendasCellClick(Column: TColumn);
@@ -93,9 +96,27 @@ begin
 
    for i:=0 to jsonProdutos.Size -1 do
    begin
-   idProdutos.Add(jsonProdutos.Get(i).GetValue<integer>('product_id') .ToString);
+     if queryProdutos.Locate('COD_SITE', jsonProdutos.Get(i).GetValue<integer>('product_id').ToString ) then
+     begin
+     var insert:string;
+       queryItensVendas.Active:=true;
+     queryItensVendas.Append;
+     queryItensVendas.SQL.Clear;
+     insert:='INSERT INTO VENDAS_CLIENTES_ITENS(DOCUMENTO,COD_PRODUTO,PROD_CLASSFISCAL, PROD_CLASSTRIB, CFOP, VALORPRODUTO,QTDE) VALUES (1,'+jsonProdutos.Get(i).GetValue<integer>('sku').ToString+',1,1,1,'+jsonProdutos.Get(i).GetValue<Double>('total').ToString+','+jsonProdutos.Get(i).GetValue<integer>('quantity').ToString;
+
+     {queryItensVendas.ParamByName('pProduto').Value:=;
+     queryItensVendas.ParamByName('pValor').AsString:=jsonProdutos.Get(i).GetValue<integer>('total').ToString;
+     queryItensVendas.ParamByName('pQtde').AsString:=jsonProdutos.Get(i).GetValue<integer>('quantity').ToString;}
+
+
+
+     queryItensVendas.SQL.Add(insert);
+     queryItensVendas.Open;
+     end;
+
+
    end;
-     Memo1.Text :=idProdutos.ToString;
+
   //Busca cliente no banco de dados
   { if queryCliente.Locate('COD_SITE', dbVendas.Fields[6].AsInteger) then
     begin

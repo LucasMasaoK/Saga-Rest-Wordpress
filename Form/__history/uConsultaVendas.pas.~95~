@@ -59,6 +59,9 @@ type
     FDMemTable1needs_processing: TWideStringField;
     Memo1: TMemo;
     queryCliente: TFDQuery;
+    queryProdutos: TFDQuery;
+    queryItensVendas: TFDQuery;
+    dataItensVendas: TDataSource;
     procedure dbVendasCellClick(Column: TColumn);
     procedure btnPesquisarClick(Sender: TObject);
   private
@@ -79,31 +82,58 @@ uses uCadastroVendas, uDataModule;
 procedure TfrmConsultaVendas.btnPesquisarClick(Sender: TObject);
 begin
   RESTRequest1.Execute;
-  Memo1.Text := dbVendas.Fields[22].AsAnsiString;
+
 end;
 
 procedure TfrmConsultaVendas.dbVendasCellClick(Column: TColumn);
 begin
   var
-  jsonProdutos: TJSONValue;
-  jsonProdutos := TJSONObject.ParseJSONValue(dbVendas.Fields[22].AsString);
-  Memo1.Text := dbVendas.Fields[22].AsString;
+    jsonProdutos, idProdutos: TJSONArray;
+  var
+    i: integer;
+  jsonProdutos := TJSONObject.ParseJSONValue(dbVendas.Fields[22].AsString)
+    as TJSONArray;
+
   queryCliente.Edit;
-
-   for i=0 to jsonProdutos.Get() do
-
-  //Busca cliente no banco de dados
-  { if queryCliente.Locate('COD_SITE', dbVendas.Fields[6].AsInteger) then
-    begin
+  // Busca cliente no banco de dados
+  if queryCliente.Locate('COD_SITE', dbVendas.Fields[6].AsInteger) then
+  begin
     frmCadastroVendas.queryVendasCOD_CLIENTE.Value := dbVendas.Fields[6]
-    .AsInteger;
+      .AsInteger;
     frmConsultaVendas.Close;
+  end
+  else
+  begin
+    ShowMessage('Cliente não encontrado');
+    abort;
+  end;
+
+  for i := 0 to jsonProdutos.Size - 1 do
+  begin
+    if queryProdutos.Locate('COD_SITE', jsonProdutos.Get(i)
+      .GetValue<integer>('product_id').ToString) then
+    begin
+      var
+        insert: string;
+      queryItensVendas.Active := true;
+      queryItensVendas.Append;
+      queryItensVendas.SQL.Clear;
+      insert := 'INSERT INTO VENDAS_CLIENTES_ITENS(DOCUMENTO,COD_PRODUTO,PROD_CLASSFISCAL, PROD_CLASSTRIB, CFOP, VALORPRODUTO,QTDE) VALUES (1,'
+        + jsonProdutos.Get(i).GetValue<integer>('sku').ToString + ',1,1,1,' +
+        jsonProdutos.Get(i).GetValue<Double>('total').ToString + ',' +
+        jsonProdutos.Get(i).GetValue<integer>('quantity').ToString;
+      queryItensVendas.SQL.Add(insert);
+      queryItensVendas.Open;
     end
     else
     begin
-    ShowMessage('Cliente não encontrado');
-    abort;
-    end; }
+      ShowMessage('Produto ' + jsonProdutos.Get(i)
+        .GetValue<integer>('product_id').ToString +
+        ' não está cadastrado no sistema');
+      abort;
+    end;
+
+  end;
 
 end;
 

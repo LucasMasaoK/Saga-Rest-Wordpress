@@ -183,6 +183,7 @@ object frmConsultaVendas: TfrmConsultaVendas
       item
         Expanded = False
         FieldName = 'line_items'
+        Width = 3000
         Visible = True
       end
       item
@@ -238,6 +239,7 @@ object frmConsultaVendas: TfrmConsultaVendas
       'https://cvcacessorios.com.br/wp-json/wc/v3/orders?consumer_key=c' +
       'k_f1b6e8c33b87879ba2b27d9573e2a98f07f4c269&consumer_secret=cs_7a' +
       '0bf264d6f1871c765b89d7eecccabacbc19088&status=pending'
+    ContentType = 'application/json'
     Params = <>
     SynchronizedEvents = False
     Left = 328
@@ -425,7 +427,7 @@ object frmConsultaVendas: TfrmConsultaVendas
       item
         Name = 'line_items'
         DataType = ftWideString
-        Size = 255
+        Size = 1500
       end
       item
         Name = 'tax_lines'
@@ -604,8 +606,9 @@ object frmConsultaVendas: TfrmConsultaVendas
       Size = 255
     end
     object FDMemTable1line_items: TWideStringField
+      DisplayWidth = 1500
       FieldName = 'line_items'
-      Size = 255
+      Size = 1500
     end
     object FDMemTable1tax_lines: TWideStringField
       FieldName = 'tax_lines'
@@ -656,5 +659,20 @@ object frmConsultaVendas: TfrmConsultaVendas
       'SELECT * FROM CLIENTES_PESJURIDICA')
     Left = 696
     Top = 360
+  end
+  object queryProdutos: TFDQuery
+    Active = True
+    Connection = DataModule1.bancoConexao
+    SQL.Strings = (
+      'SELECT * FROM PRODUTOS;')
+    Left = 776
+    Top = 360
+  end
+  object queryItensVendas: TFDQuery
+    Connection = DataModule1.bancoConexao
+    SQL.Strings = (
+      'SELECT * FROM VENDAS_CLIENTES_ITENS;')
+    Left = 592
+    Top = 368
   end
 end

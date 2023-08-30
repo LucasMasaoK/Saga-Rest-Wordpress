@@ -661,6 +661,7 @@ object frmConsultaVendas: TfrmConsultaVendas
     Top = 360
   end
   object queryProdutos: TFDQuery
+    Active = True
     Connection = DataModule1.bancoConexao
     SQL.Strings = (
       'SELECT * FROM PRODUTOS;')
@@ -669,9 +670,18 @@ object frmConsultaVendas: TfrmConsultaVendas
   end
   object queryItensVendas: TFDQuery
     Connection = DataModule1.bancoConexao
+    UpdateOptions.AssignedValues = [uvFetchGeneratorsPoint, uvGeneratorName]
+    UpdateOptions.FetchGeneratorsPoint = gpImmediate
+    UpdateOptions.GeneratorName = 'GEN_VENDAS_CLIENTES_ITENS_ID'
+    UpdateOptions.AutoIncFields = 'COD_VENDAS_CLIENTES_ITENS'
     SQL.Strings = (
       'SELECT * FROM VENDAS_CLIENTES_ITENS;')
     Left = 592
     Top = 368
+  end
+  object dataItensVendas: TDataSource
+    DataSet = queryItensVendas
+    Left = 624
+    Top = 328
   end
 end
